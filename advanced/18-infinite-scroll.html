@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infinite Scrolling</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.item { background: #fff; border: 1px solid #e3e3e8; border-radius: 8px; padding: 1.5rem 1rem; margin-bottom: .75rem; }
+</style>
+</head>
+<body>
+<p class="back"><a href="index.html">&larr; Back to list</a></p>
+<main class="container">
+<h1>Infinite Scrolling</h1>
+<div id="list"></div>
+<p id="sentinel">Loading more...</p>
+</main>
+<script>
+const list = document.getElementById('list');
+let n = 0;
+function loadMore(count = 10) {
+  for (let i = 0; i < count; i++) {
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.textContent = 'Item #' + (++n);
+    list.appendChild(div);
+  }
+}
+loadMore(15);
+// When the sentinel becomes visible, add more items
+new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) setTimeout(loadMore, 300);
+}).observe(document.getElementById('sentinel'));
+</script>
+</body>
+</html>

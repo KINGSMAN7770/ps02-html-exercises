@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Page</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.product { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+@media (max-width: 700px) { .product { grid-template-columns: 1fr; } }
+#main { width: 100%; border-radius: 8px; }
+.thumbs { display: flex; gap: .5rem; margin-top: .5rem; }
+.thumbs img { width: 80px; cursor: pointer; border-radius: 4px; }
+.price { font-size: 1.6rem; color: #c0392b; font-weight: bold; }
+.price s { font-size: 1rem; color: #888; }
+#add { background: #f39c12; border: 0; color: #fff; padding: .6rem 1.2rem; border-radius: 6px; }
+</style>
+</head>
+<body>
+<p class="back"><a href="index.html">&larr; Back to list</a></p>
+<main class="container">
+<h1>Product Page</h1>
+<div class="product">
+  <div>
+    <img id="main" src="../assets/img2.svg" alt="Wireless headphones, main photo">
+    <div class="thumbs">
+      <img src="../assets/img2.svg" alt="Photo 1">
+      <img src="../assets/img3.svg" alt="Photo 2">
+      <img src="../assets/img4.svg" alt="Photo 3">
+    </div>
+  </div>
+  <div>
+    <h2>Wireless Headphones X200</h2>
+    <p class="price">$59.99 <s>$79.99</s></p>
+    <p>Bluetooth 5.3, 30 hours battery, active noise cancelling, foldable design.</p>
+    <ul><li>Colour: black</li><li>Weight: 220 g</li><li>Warranty: 1 year</li></ul>
+    <label for="qty">Quantity</label>
+    <input id="qty" type="number" value="1" min="1" max="10">
+    <button id="add">Add to Cart</button>
+    <p id="cart" aria-live="polite">Cart: 0 items</p>
+  </div>
+</div>
+</main>
+<script>
+let count = 0;
+document.querySelectorAll('.thumbs img').forEach(t =>
+  t.addEventListener('click', () => document.getElementById('main').src = t.src));
+document.getElementById('add').addEventListener('click', () => {
+  count += Number(document.getElementById('qty').value);
+  document.getElementById('cart').textContent = 'Cart: ' + count + ' items';
+});
+</script>
+</body>
+</html>

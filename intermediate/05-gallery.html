@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Image Gallery</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+.gallery figure { margin: 0; background: #fff; padding: .5rem; border-radius: 8px; }
+.gallery img { width: 100%; display: block; }
+.gallery figcaption { text-align: center; padding-top: .3rem; }
+</style>
+</head>
+<body>
+<p class="back"><a href="index.html">&larr; Back to list</a></p>
+<main class="container">
+<h1>Responsive Image Gallery</h1>
+<div class="gallery">
+  <figure><img src="../assets/img1.svg" alt="Sample image 1"><figcaption>Picture 1</figcaption></figure>
+  <figure><img src="../assets/img2.svg" alt="Sample image 2"><figcaption>Picture 2</figcaption></figure>
+  <figure><img src="../assets/img3.svg" alt="Sample image 3"><figcaption>Picture 3</figcaption></figure>
+  <figure><img src="../assets/img4.svg" alt="Sample image 4"><figcaption>Picture 4</figcaption></figure>
+</div>
+</main>
+</body>
+</html>

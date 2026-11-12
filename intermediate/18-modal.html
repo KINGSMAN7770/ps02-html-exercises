@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modal Popup</title>
+<link rel="stylesheet" href="../css/style.css">
+
+</head>
+<body>
+<p class="back"><a href="index.html">&larr; Back to list</a></p>
+<main class="container">
+<h1>Modal Popup</h1>
+<button id="open">Open modal</button>
+<dialog id="dlg">
+  <h2>Hello!</h2>
+  <p>This is a modal popup.</p>
+  <button id="close">Close</button>
+</dialog>
+</main>
+<script>
+const dlg = document.getElementById('dlg');
+document.getElementById('open').onclick = () => dlg.showModal();
+document.getElementById('close').onclick = () => dlg.close();
+</script>
+</body>
+</html>

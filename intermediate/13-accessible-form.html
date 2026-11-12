@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accessible Form</title>
+<link rel="stylesheet" href="../css/style.css">
+
+</head>
+<body>
+<p class="back"><a href="index.html">&larr; Back to list</a></p>
+<main class="container">
+<h1>Accessible Form</h1>
+<form action="#" aria-labelledby="ftitle">
+  <h2 id="ftitle">Registration</h2>
+  <p><label for="u">Username</label><br>
+     <input id="u" name="u" required aria-required="true" aria-describedby="uhelp">
+     <br><small id="uhelp">3&ndash;16 characters.</small></p>
+  <p><label for="pw">Password</label><br>
+     <input id="pw" type="password" required aria-required="true"></p>
+  <button type="submit">Register</button>
+</form>
+</main>
+</body>
+</html>

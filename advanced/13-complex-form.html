@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complex Form with Custom Errors</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>.err{color:crimson;font-size:.9rem}</style>
+</head>
+<body>
+<p class="back"><a href="index.html">&larr; Back to list</a></p>
+<main class="container">
+<h1>Complex Form with Custom Errors</h1>
+<form id="f" novalidate>
+  <p><label for="d">Event date (must be in the future)</label><br><input id="d" type="date" required> <span class="err"></span></p>
+  <p><label for="r">Number of guests: <output id="ro">5</output></label><br><input id="r" type="range" min="1" max="50" value="5"></p>
+  <p><label for="c">Theme colour (not black)</label><br><input id="c" type="color" value="#4f86f7"> <span class="err"></span></p>
+  <p><label for="t">Phone (+996XXXXXXXXX)</label><br><input id="t" type="tel" required pattern="\+996[0-9]{9}"> <span class="err"></span></p>
+  <button>Book</button>
+</form>
+<p id="ok" hidden>Booking accepted!</p>
+</main>
+<script>
+const f = document.getElementById('f');
+const d = document.getElementById('d'), c = document.getElementById('c'), t = document.getElementById('t');
+document.getElementById('r').oninput = e => document.getElementById('ro').textContent = e.target.value;
+
+function check() {
+  const today = new Date().toISOString().slice(0, 10);
+  d.setCustomValidity(!d.value ? 'Please choose a date.' : d.value <= today ? 'The date must be in the future.' : '');
+  c.setCustomValidity(c.value === '#000000' ? 'Black is not allowed, choose another colour.' : '');
+  t.setCustomValidity(t.validity.valueMissing ? 'Phone is required.' :
+                      t.validity.patternMismatch ? 'Use the format +996XXXXXXXXX.' : '');
+  [d, c, t].forEach(inp => inp.nextElementSibling.textContent = inp.validationMessage);
+  return f.checkValidity();
+}
+f.addEventListener('submit', e => {
+  e.preventDefault();
+  document.getElementById('ok').hidden = !check();
+});
+</script>
+</body>
+</html>

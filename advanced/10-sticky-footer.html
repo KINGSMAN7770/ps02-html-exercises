@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sticky Footer Layout</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+body { display: flex; flex-direction: column; min-height: 100vh; }
+main { flex: 1; }
+footer { background: #222; color: #fff; text-align: center; padding: 1rem; }
+</style>
+</head>
+<body>
+<p class="back"><a href="index.html">&larr; Back to list</a></p>
+<main class="container">
+  <h1>Sticky Footer Layout</h1>
+  <p>There is very little content here, but the footer still stays at the bottom of the window (flexbox + min-height: 100vh).</p>
+</main>
+<footer>I am always at the bottom</footer>
+</body>
+</html>

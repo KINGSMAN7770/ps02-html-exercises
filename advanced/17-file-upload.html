@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Custom File Upload</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.upload-btn { background: #1a5fd0; color: #fff; padding: .7rem 1.2rem; border-radius: 6px; cursor: pointer; }
+input:focus-visible + .upload-btn { outline: 3px solid #f39c12; }
+</style>
+</head>
+<body>
+<p class="back"><a href="index.html">&larr; Back to list</a></p>
+<main class="container">
+<h1>Custom File Upload</h1>
+<input type="file" id="file" class="visually-hidden" multiple>
+<label for="file" class="upload-btn">&#128193; Choose files</label>
+<p id="names">No file selected</p>
+</main>
+<script>
+document.getElementById('file').addEventListener('change', e => {
+  const files = [...e.target.files];
+  document.getElementById('names').textContent =
+    files.length ? 'Selected: ' + files.map(f => f.name).join(', ') : 'No file selected';
+});
+</script>
+</body>
+</html>

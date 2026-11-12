@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parallax Scrolling</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.parallax { height: 60vh; background-size: cover; background-position: center; background-attachment: fixed; display: flex; align-items: center; justify-content: center; }
+.parallax span { background: rgba(0,0,0,.5); color: #fff; padding: .5rem 1rem; font-size: 1.5rem; border-radius: 6px; }
+.p1 { background-image: url(../assets/img1.svg); }
+.p2 { background-image: url(../assets/img5.svg); }
+.p3 { background-image: url(../assets/img3.svg); }
+.text { padding: 3rem 1rem; background: #fff; }
+</style>
+</head>
+<body>
+<p class="back"><a href="index.html">&larr; Back to list</a></p>
+<main class="container">
+<h1>Parallax Scrolling</h1>
+<div class="parallax p1"><span>Scroll down</span></div>
+<div class="text"><p>Parallax uses <code>background-attachment: fixed</code>, so the background moves slower than the content.</p></div>
+<div class="parallax p2"><span>Keep scrolling</span></div>
+<div class="text"><p>On some mobile browsers fixed backgrounds are disabled, so the effect may not appear there.</p></div>
+<div class="parallax p3"><span>The end</span></div>
+</main>
+</body>
+</html>

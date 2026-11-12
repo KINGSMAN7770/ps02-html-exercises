@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard with Charts</title>
+<link rel="stylesheet" href="../css/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
+.stat, .panel { background: #fff; border-radius: 8px; padding: 1rem; border: 1px solid #e3e3e8; }
+.stat span { display: block; color: #666; }
+.stat strong { font-size: 1.6rem; }
+.charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin: 1rem 0; }
+</style>
+</head>
+<body>
+<p class="back"><a href="index.html">&larr; Back to list</a></p>
+<main class="container">
+<h1>Dashboard with Charts</h1>
+<div class="stats">
+  <div class="stat"><span>Visitors</span><strong>12,480</strong></div>
+  <div class="stat"><span>Sales</span><strong>$8,920</strong></div>
+  <div class="stat"><span>Orders</span><strong>342</strong></div>
+</div>
+<div class="charts">
+  <div class="panel"><canvas id="line"></canvas></div>
+  <div class="panel"><canvas id="bar"></canvas></div>
+</div>
+<button id="refresh">Refresh data</button>
+</main>
+<script>
+if (typeof Chart === 'undefined') {
+  // Chart.js is loaded from a CDN, so it needs an internet connection
+  document.querySelector('.charts').innerHTML = '<p>Charts need an internet connection (Chart.js is loaded from a CDN).</p>';
+  throw new Error('Chart.js not loaded');
+}
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+const rnd = () => months.map(() => Math.round(Math.random() * 100 + 20));
+const line = new Chart(document.getElementById('line'), {
+  type: 'line',
+  data: { labels: months, datasets: [{ label: 'Visitors', data: rnd(), borderColor: '#4f86f7', tension: .3 }] }
+});
+const bar = new Chart(document.getElementById('bar'), {
+  type: 'bar',
+  data: { labels: months, datasets: [{ label: 'Sales', data: rnd(), backgroundColor: '#4fc98a' }] }
+});
+document.getElementById('refresh').onclick = () => {
+  line.data.datasets[0].data = rnd(); line.update();
+  bar.data.datasets[0].data = rnd(); bar.update();
+};
+</script>
+</body>
+</html>

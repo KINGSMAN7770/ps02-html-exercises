@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Navigation Bar</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.navbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; background: #222; padding: .6rem 1rem; border-radius: 8px; }
+.logo { color: #fff; font-weight: bold; }
+.navbar ul { list-style: none; display: flex; gap: 1rem; margin: 0; padding: 0; }
+.navbar a { color: #fff; text-decoration: none; }
+.burger { display: none; background: none; border: 0; color: #fff; font-size: 1.6rem; }
+@media (max-width: 700px) {
+  .burger { display: block; }
+  .navbar ul { display: none; width: 100%; flex-direction: column; padding-top: .5rem; }
+  .navbar ul.open { display: flex; }
+}
+</style>
+</head>
+<body>
+<p class="back"><a href="index.html">&larr; Back to list</a></p>
+<main class="container">
+<h1>Responsive Navigation Bar</h1>
+<nav class="navbar">
+  <span class="logo">MySite</span>
+  <button class="burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="menu">&#9776;</button>
+  <ul id="menu">
+    <li><a href="#">Home</a></li><li><a href="#">Services</a></li>
+    <li><a href="#">Blog</a></li><li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+<p>Make the window narrower than 700px to see the hamburger menu.</p>
+</main>
+<script>
+const burger = document.querySelector('.burger');
+const menu = document.getElementById('menu');
+burger.addEventListener('click', () => {
+  const open = menu.classList.toggle('open');
+  burger.setAttribute('aria-expanded', open);
+});
+</script>
+</body>
+</html>

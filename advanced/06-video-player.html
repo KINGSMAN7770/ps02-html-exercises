@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Custom Video Player</title>
+<link rel="stylesheet" href="../css/style.css">
+
+</head>
+<body>
+<p class="back"><a href="index.html">&larr; Back to list</a></p>
+<main class="container">
+<h1>Custom Video Player</h1>
+<div class="player">
+  <video id="v" width="480" src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"></video>
+  <div class="controls">
+    <button id="play">&#9654; Play</button>
+    <label for="vol">Volume</label>
+    <input id="vol" type="range" min="0" max="1" step="0.05" value="1">
+    <button id="mute">Mute</button>
+  </div>
+</div>
+</main>
+<script>
+const v = document.getElementById('v');
+const play = document.getElementById('play');
+play.onclick = () => v.paused ? v.play() : v.pause();
+v.onplay = () => play.innerHTML = '&#10074;&#10074; Pause';
+v.onpause = () => play.innerHTML = '&#9654; Play';
+document.getElementById('vol').oninput = e => v.volume = e.target.value;
+document.getElementById('mute').onclick = e => {
+  v.muted = !v.muted;
+  e.target.textContent = v.muted ? 'Unmute' : 'Mute';
+};
+</script>
+</body>
+</html>

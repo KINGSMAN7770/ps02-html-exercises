@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dark Mode Toggle</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+:root { --bg: #ffffff; --text: #222222; --box: #f0f0f5; }
+[data-theme="dark"] { --bg: #121212; --text: #eeeeee; --box: #2a2a2a; }
+body { background: var(--bg); color: var(--text); transition: background .3s, color .3s; }
+.box { background: var(--box); padding: 1rem; border-radius: 8px; margin-top: 1rem; }
+[data-theme="dark"] a { color: #8ab4ff; }
+</style>
+</head>
+<body>
+<p class="back"><a href="index.html">&larr; Back to list</a></p>
+<main class="container">
+<h1>Dark Mode Toggle</h1>
+<button id="toggle">Switch to dark mode</button>
+<div class="box"><p>The colours on this page come from CSS variables. The button switches the variable values.</p></div>
+</main>
+<script>
+const btn = document.getElementById('toggle');
+btn.onclick = () => {
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', dark ? 'light' : 'dark');
+  btn.textContent = dark ? 'Switch to dark mode' : 'Switch to light mode';
+};
+</script>
+</body>
+</html>

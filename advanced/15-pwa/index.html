@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Progressive Web App</title>
+<link rel="stylesheet" href="../../css/style.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1a5fd0">
+<link rel="icon" href="icon.svg">
+</head>
+<body>
+<p class="back"><a href="../index.html">&larr; Back to list</a></p>
+<main class="container">
+<h1>Progressive Web App</h1>
+<p>This page has a <code>manifest.json</code> and a service worker (<code>sw.js</code>) that caches files, so it opens without internet after the first visit.</p>
+<p>Status: <strong id="status">checking...</strong></p>
+<p>Works only over HTTPS (for example GitHub Pages) or on <code>localhost</code>.</p>
+</main>
+<script>
+const status = document.getElementById('status');
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js')
+    .then(() => status.textContent = 'service worker registered, offline mode ready')
+    .catch(err => status.textContent = 'registration failed: ' + err.message);
+} else {
+  status.textContent = 'service workers are not supported in this browser';
+}
+</script>
+</body>
+</html>

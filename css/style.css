@@ -1,0 +1,19 @@
+/* Shared styles for all exercise pages */
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #222; background: #f7f7f9; }
+.container { max-width: 960px; margin: 0 auto; padding: 1rem 1.25rem 3rem; }
+.back { max-width: 960px; margin: 0 auto; padding: .75rem 1.25rem 0; }
+a { color: #1a5fd0; }
+h1 { line-height: 1.2; }
+img, video, iframe, canvas { max-width: 100%; }
+section.ex { background: #fff; border: 1px solid #e3e3e8; border-radius: 10px; padding: 1rem 1.25rem; margin: 1rem 0; }
+section.ex > h2 { margin-top: 0; font-size: 1.15rem; color: #444; }
+table { border-collapse: collapse; }
+th, td { border: 1px solid #bbb; padding: .4rem .7rem; text-align: left; }
+input, select, textarea, button { font: inherit; padding: .4rem .6rem; }
+button { cursor: pointer; }
+label { display: inline-block; margin: .25rem 0; }
+.ex-list li { margin: .3rem 0; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+.card { display: block; background: #fff; border: 1px solid #e3e3e8; border-radius: 10px; padding: 1.25rem; text-decoration: none; color: inherit; }
+.card:hover { border-color: #1a5fd0; }

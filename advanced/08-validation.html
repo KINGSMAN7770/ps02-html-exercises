@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client-side Validation</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>.err{color:crimson;font-size:.9rem}</style>
+</head>
+<body>
+<p class="back"><a href="index.html">&larr; Back to list</a></p>
+<main class="container">
+<h1>Client-side Validation</h1>
+<form id="f" novalidate>
+  <p><label for="u">Username (letters only, 3+)</label><br><input id="u" required pattern="[A-Za-z]{3,}"> <span class="err"></span></p>
+  <p><label for="e">Email</label><br><input id="e" type="email" required> <span class="err"></span></p>
+  <p><label for="a">Age (16&ndash;99)</label><br><input id="a" type="number" min="16" max="99" required> <span class="err"></span></p>
+  <button>Register</button>
+</form>
+<p id="ok" hidden>All fields are valid!</p>
+</main>
+<script>
+const form = document.getElementById('f');
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  let valid = true;
+  form.querySelectorAll('input').forEach(inp => {
+    const err = inp.nextElementSibling;
+    err.textContent = inp.checkValidity() ? '' : inp.validationMessage;
+    if (!inp.checkValidity()) valid = false;
+  });
+  document.getElementById('ok').hidden = !valid;
+});
+</script>
+</body>
+</html>

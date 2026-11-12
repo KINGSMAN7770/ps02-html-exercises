@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accessible Drag and Drop</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+@media (max-width: 600px) { .board { grid-template-columns: 1fr; } }
+.col { background: #fff; border: 2px dashed #ccc; border-radius: 8px; padding: .5rem; min-height: 200px; }
+.col.over { border-color: #1a5fd0; background: #eef4ff; }
+.col h2 { font-size: 1.1rem; margin: .3rem; }
+.col ul { list-style: none; padding: 0; margin: 0; min-height: 150px; }
+.col li { background: #e8f0ff; margin: .4rem; padding: .6rem; border-radius: 6px; cursor: grab; }
+.col li[aria-grabbed="true"] { outline: 3px solid #f39c12; }
+.sr { position: absolute; left: -9999px; }
+</style>
+</head>
+<body>
+<p class="back"><a href="index.html">&larr; Back to list</a></p>
+<main class="container">
+<h1>Accessible Drag and Drop</h1>
+<p>Drag tasks with the mouse, or use the keyboard: <kbd>Tab</kbd> to a task, <kbd>Space</kbd> to pick it up, <kbd>&larr;</kbd>/<kbd>&rarr;</kbd> to move it, <kbd>Space</kbd> to drop.</p>
+<div class="board">
+  <div class="col" data-col="todo"><h2 id="h-todo">To do</h2><ul aria-labelledby="h-todo">
+    <li draggable="true" tabindex="0" role="button" aria-grabbed="false">Learn HTML</li>
+    <li draggable="true" tabindex="0" role="button" aria-grabbed="false">Learn CSS</li>
+    <li draggable="true" tabindex="0" role="button" aria-grabbed="false">Learn JS</li>
+  </ul></div>
+  <div class="col" data-col="doing"><h2 id="h-doing">Doing</h2><ul aria-labelledby="h-doing"></ul></div>
+  <div class="col" data-col="done"><h2 id="h-done">Done</h2><ul aria-labelledby="h-done"></ul></div>
+</div>
+<p id="live" aria-live="assertive" class="sr"></p>
+</main>
+<script>
+const cols = [...document.querySelectorAll('.col')];
+const live = document.getElementById('live');
+let dragged = null;
+
+function colName(col) { return col.querySelector('h2').textContent; }
+
+// Mouse drag and drop
+document.addEventListener('dragstart', e => { if (e.target.matches('li')) dragged = e.target; });
+cols.forEach(col => {
+  col.addEventListener('dragover', e => { e.preventDefault(); col.classList.add('over'); });
+  col.addEventListener('dragleave', () => col.classList.remove('over'));
+  col.addEventListener('drop', e => {
+    e.preventDefault();
+    col.classList.remove('over');
+    if (dragged) {
+      col.querySelector('ul').appendChild(dragged);
+      live.textContent = dragged.textContent + ' moved to ' + colName(col);
+    }
+  });
+});
+
+// Keyboard support
+document.addEventListener('keydown', e => {
+  const li = document.activeElement;
+  if (!li.matches('.col li')) return;
+  const grabbed = li.getAttribute('aria-grabbed') === 'true';
+  if (e.key === ' ' || e.key === 'Enter') {
+    e.preventDefault();
+    li.setAttribute('aria-grabbed', !grabbed);
+    live.textContent = (grabbed ? 'Dropped ' : 'Picked up ') + li.textContent;
+  } else if (grabbed && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
+    e.preventDefault();
+    const i = cols.indexOf(li.closest('.col')) + (e.key === 'ArrowRight' ? 1 : -1);
+    if (i >= 0 && i < cols.length) {
+      cols[i].querySelector('ul').appendChild(li);
+      li.focus();
+      live.textContent = li.textContent + ' moved to ' + colName(cols[i]);
+    }
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accessible Accordion</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.accordion h3 { margin: 0; }
+.acc-btn { width: 100%; text-align: left; background: #fff; border: 1px solid #ccc; padding: .8rem; font-weight: bold; }
+.acc-btn[aria-expanded="true"] { background: #e8f0ff; }
+.acc-panel { border: 1px solid #ccc; border-top: 0; padding: 0 .8rem; background: #fff; }
+</style>
+</head>
+<body>
+<p class="back"><a href="index.html">&larr; Back to list</a></p>
+<main class="container">
+<h1>Accessible Accordion</h1>
+<div class="accordion">
+<h3><button class="acc-btn" aria-expanded="false" aria-controls="p0" id="b0">What is HTML?</button></h3>
+<div class="acc-panel" id="p0" role="region" aria-labelledby="b0" hidden><p>HTML is the markup language for web pages.</p></div>
+<h3><button class="acc-btn" aria-expanded="false" aria-controls="p1" id="b1">What is CSS?</button></h3>
+<div class="acc-panel" id="p1" role="region" aria-labelledby="b1" hidden><p>CSS styles HTML elements.</p></div>
+<h3><button class="acc-btn" aria-expanded="false" aria-controls="p2" id="b2">What is JavaScript?</button></h3>
+<div class="acc-panel" id="p2" role="region" aria-labelledby="b2" hidden><p>JavaScript adds interactivity.</p></div>
+</div>
+</main>
+<script>
+document.querySelectorAll('.acc-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', !expanded);
+    document.getElementById(btn.getAttribute('aria-controls')).hidden = expanded;
+  });
+});
+</script>
+</body>
+</html>
